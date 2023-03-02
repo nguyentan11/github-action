@@ -13,7 +13,7 @@ jobs:
     - name: Checkout repo
       uses: actions/checkout@v3
       with:
-        repository: nguyentan11/tfsoft-lab1
+        repository: nguyentan11/fsoft-lab1
         ref: 'test' 
     - name: Specific terraform version
       uses: hashicorp/setup-terraform@v2
