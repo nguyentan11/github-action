@@ -1,0 +1,27 @@
+name: terraform-deploy
+run-name: ${{ github.actor }} is deploying terraform infrastructure
+on:
+  push:
+    branches:
+      - test
+
+jobs:
+  terraform-test:
+    name: Deploy TF
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@test
+      with:
+        repository: nguyentan11/tfsoft-lab1
+    - name: Specific terraform version
+      uses: hashicorp/setup-terraform@v2
+      with:
+        terraform_version: 1.3.9
+        cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+    - run: terraform init
+    - name: plan tf
+      run: terraform plan -no-color
+    - run: echo ${{ steps.plan.outputs.stdout }}
+    - run: echo ${{ steps.plan.outputs.stderr }}
+    - run: echo ${{ steps.plan.outputs.exitcode }} 
