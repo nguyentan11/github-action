@@ -39,7 +39,7 @@ jobs:
         AWS_REGION: ${{ secrets.AWS_REGION }}
       run: terraform apply -auto-approve -lock=false -input=false
     - name: Call terraform output
-      run: |
+      run:
         linux_ip=${terraform output linux_private_ip}
         echo $linux_ip
        windows_ip=${terraform output windows_private_ip}
