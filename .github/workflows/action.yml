@@ -47,29 +47,29 @@ jobs:
         linux_private_ip=$(terraform output linux_private_ip)
         echo $linux_private_ip
     - name: Checkout code
-        uses: actions/checkout@v3
-      - name: Setup remote
-        run: |
-          echo "$SSH_PUBLIC_KEY" | sudo tee /etc/ssh/authorized_keys
-          sudo tee /etc/ssh/sshd_config <<EOF
-            PasswordAuthentication no
-            PubkeyAuthentication yes
-            AuthorizedKeysFile /etc/ssh/authorized_keys
-            PermitRootLogin no
-            Subsystem sftp /usr/lib/openssh/sftp-server
-          EOF
-          sudo systemctl restart sshd
-          echo 'SSH_KNOWN_HOSTS<<EOF' >> $GITHUB_ENV
-          echo $(ssh-keyscan localhost) >> $GITHUB_ENV
-          echo 'EOF' >> $GITHUB_ENV
-      - name: With everything
-        uses: ./
-        with:
-          playbook: li-nrplaybook.yml
-          directory: test
-          inventory: |
-            [all]
-            $(terraform output linux_private_ip) $(terraform output linux_private_key_pem) 
+      uses: actions/checkout@v3
+    - name: Setup remote
+      run: |
+        echo "$SSH_PUBLIC_KEY" | sudo tee /etc/ssh/authorized_keys
+        sudo tee /etc/ssh/sshd_config <<EOF
+        PasswordAuthentication no
+        PubkeyAuthentication yes
+        AuthorizedKeysFile /etc/ssh/authorized_keys
+        PermitRootLogin no
+        Subsystem sftp /usr/lib/openssh/sftp-server
+        EOF
+        sudo systemctl restart sshd
+        echo 'SSH_KNOWN_HOSTS<<EOF' >> $GITHUB_ENV
+        echo $(ssh-keyscan localhost) >> $GITHUB_ENV
+        echo 'EOF' >> $GITHUB_ENV
+    - name: With everything
+      uses: ./
+      with:
+        playbook: li-nrplaybook.yml
+        directory: test
+        inventory: |
+          [all]
+          $(terraform output linux_private_ip) $(terraform output linux_private_key_pem) 
     - name: destroy tf
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
