@@ -26,19 +26,14 @@ jobs:
         terraform_wrapper: false
     - name: Initial TF
       run: terraform init
-#    - name: Plan tf
-#      run: terraform plan -lock=false -input=false
-#    - name: Apply tf
-#      run: terraform apply -auto-approve -lock=false -input=false
-#    - name: Call terraform output
-#      run: |
-#        linux_private_ip=$(terraform output linux_private_ip)
-#        echo $linux_private_ip
-    
+    - name: Plan tf
+      run: terraform plan -lock=false -input=false
+    - name: Apply tf
+      run: terraform apply -auto-approve -lock=false -input=false
+    - name: Call terraform output
+      run: |
+        linux_private_ip=$(terraform output linux_private_ip)
+        echo $linux_private_ip   
     - name: destroy tf
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        AWS_REGION: ${{ secrets.AWS_REGION }}
       run: terraform destroy -auto-approve -lock=false
 
