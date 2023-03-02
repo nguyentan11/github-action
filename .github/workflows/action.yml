@@ -38,31 +38,7 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
        AWS_REGION: ${{ secrets.AWS_REGION }}
       run: terraform apply -auto-approve -lock=false -input=false
-    - name: Call terraform output
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        AWS_REGION: ${{ secrets.AWS_REGION }}
-      run: |
-        linux_private_ip=$(terraform output linux_private_ip)
-        echo $linux_private_ip
-    - name: Run playbook
-      uses: dawidd6/action-ansible-playbook@v2
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        AWS_REGION: ${{ secrets.AWS_REGION }}
-      with:
-        # Required, playbook filepath
-        playbook: li-nrplaybook.yml
-        # Optional, directory where playbooks live
-        directory: ./
-        # Optional, SSH private key
-        key: 
-        # Optional, literal inventory file contents
-        inventory: |
-          [linux]
-          $(terraform output linux_private_ip) ${terraform output win_private_key_pem}
+    
     - name: destroy tf
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
