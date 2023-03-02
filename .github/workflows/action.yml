@@ -35,4 +35,4 @@ jobs:
     - run: echo ${{ steps.plan.outputs.stderr }}
     - run: echo ${{ steps.plan.outputs.exitcode }} 
     - name: apply tf
-      run: terra form apply
+      run: terraform apply
