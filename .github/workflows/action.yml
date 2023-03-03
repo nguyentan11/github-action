@@ -3,7 +3,7 @@ run-name: ${{ github.actor }} is deploying terraform infrastructure
 on:
   push:
     branches: [ test ] 
-
+  workflow_dispatch:
 jobs:
   terraform-test:
     name: Deploy TF
