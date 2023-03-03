@@ -2,8 +2,7 @@ name: terraform-deploy
 run-name: ${{ github.actor }} is deploying terraform infrastructure
 on:
   push:
-    branches:
-      - test
+    branches: [ test ] 
 
 jobs:
   terraform-test:
