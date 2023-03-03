@@ -25,7 +25,7 @@ jobs:
         terraform_wrapper: false
     - name: Initial TF
       run: terraform init
-        - name: Plan tf
+    - name: Plan tf
       run: terraform plan -lock=false -input=false
     - name: Apply tf
       run: terraform apply -auto-approve -lock=false -input=false
