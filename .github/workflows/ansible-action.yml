@@ -23,4 +23,4 @@ jobs:
     -name: Run ansible-lint
       uses: ansible/ansible-lint-action@main
       with:
-        path: "simpleplaybook.yml"
+        path: "github-action/simpleplaybook.yml"
