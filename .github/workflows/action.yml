@@ -36,7 +36,6 @@ jobs:
         echo $linux_private_ip
         windows_private_ip=$(terraform output windows_private_ip)
         echo $windows_private_ip
-    
     - name: destroy tf
       run: terraform destroy -auto-approve -lock=false
 
