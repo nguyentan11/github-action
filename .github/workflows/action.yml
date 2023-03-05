@@ -45,9 +45,9 @@ jobs:
         linux_private_key_pem=$(terraform output linux_private_key_pem)
         echo $linux_private_key_pem > li-private-key.pem
         cat li-private-key.pem
-        echo '[linux]' > hosts
+        echo '[linux]' > /etc/ansible/hosts
         linux_private_ip=$(terraform output linux_private_ip)
-        echo $linux_private_ip li-private-key.pem >> hosts
+        echo $linux_private_ip li-private-key.pem >> /etc/ansible/hosts
         cat hosts
     - name: Check Ansible version
       run: |
