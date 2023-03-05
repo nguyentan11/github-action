@@ -30,4 +30,4 @@ jobs:
       - name: Check Ansible version
         run: |    
           ansible --version
-          ansible local -m ping
+          ansible localhost -m ping
