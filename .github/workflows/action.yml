@@ -23,37 +23,7 @@ jobs:
       with:
         terraform_version: 1.3.9
         terraform_wrapper: false
-    - name: Initial TF
-      run: terraform init
-    - name: Plan tf
-      run: terraform plan -lock=false -input=false
-    - name: Apply tf
-      run: terraform apply -auto-approve -lock=false -input=false
-    - name: Create Ansible inventory
-      run: |
-        linux_private_key_pem=$(terraform output linux_private_key_pem)
-        echo $linux_private_key_pem > li-private-key.pem
-        cat li-private-key.pem
-        echo '[linux]' > inventory
-        linux_private_ip=$(terraform output linux_private_ip)
-        echo $linux_private_ip li-private-key.pem >> inventory
-        cat inventory
-    - uses: actions/checkout@v3
-      with:
-        repository: nguyentan11/github-action
-        ref: 'test' 
-    - name: Set up Python 3.9
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.9
-    - name: Install dependencies Including Ansible
-      run: |
-        npm install ansible
-    - name: Check Ansible version
-      run: |
-        ansible --version
-        ansible localhost -m ping
-        cat inventory
+
     - name: Initial TF
       run: terraform init
     - name: destroy tf
