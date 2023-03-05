@@ -36,21 +36,6 @@ jobs:
         terraform_wrapper: false
     - name: Initial TF
       run: terraform init
-    - name: Plan tf
-      run: terraform plan -lock=false -input=false
-    - name: Apply tf
-      run: terraform apply -auto-approve -lock=false -input=false
-    - name: Create Ansible inventory
-      run: |
-        linux_private_key_pem=$(terraform output linux_private_key_pem)
-        echo $linux_private_key_pem > li-private-key.pem
-        cat li-private-key.pem
-        mkdir -p /etc/ansible
-        touch /etc/ansible/hosts
-        echo '[linux]' > /etc/ansible/hosts
-        linux_private_ip=$(terraform output linux_private_ip)
-        echo $linux_private_ip li-private-key.pem >> /etc/ansible/hosts
-        cat /etc/ansible/hosts
 
     - name: destroy tf
       run: terraform destroy -auto-approve -lock=false
