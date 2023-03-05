@@ -45,15 +45,15 @@ jobs:
         linux_private_key_pem=$(terraform output linux_private_key_pem)
         echo $linux_private_key_pem > li-private-key.pem
         cat li-private-key.pem
-        echo '[linux]' > inventory
+        echo '[linux]' > hosts
         linux_private_ip=$(terraform output linux_private_ip)
-        echo $linux_private_ip li-private-key.pem >> inventory
-        cat inventory
+        echo $linux_private_ip li-private-key.pem >> hosts
+        cat hosts
     - name: Check Ansible version
       run: |
         ansible --version
         ansible localhost -m ping
-        ansible linux -m ping
+        ansible -i hosts -m ping
     - name: Initial TF
       run: terraform init
     - name: destroy tf
