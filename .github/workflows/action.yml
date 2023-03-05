@@ -36,7 +36,10 @@ jobs:
         windows_private_ip=$(terraform output windows_private_ip)
         echo $windows_private_ip
         linux_private_key_pem=$(terraform output linux_private_key_pem)
-        echo $linux_private_key_pem
+        echo $linux_private_key_pem > li-private-key.pem
+    - name: read Linux private key
+      run: |
+        cat li-private-key.pem
     - name: destroy tf
       run: terraform destroy -auto-approve -lock=false
 
