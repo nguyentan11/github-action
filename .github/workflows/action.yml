@@ -53,6 +53,7 @@ jobs:
       run: |
         ansible --version
         ansible localhost -m ping
+        ansible linux -m ping
     - name: Initial TF
       run: terraform init
     - name: destroy tf
