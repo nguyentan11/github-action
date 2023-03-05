@@ -41,20 +41,20 @@ jobs:
       run: |
         cat li-private-key.pem
     - uses: actions/checkout@v3
-        with:
-          repository: nguyentan11/github-action
-          ref: 'test' 
-      - name: Set up Python 3.9
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.9
-      - name: Install dependencies Including Ansible
-        run: |
-          npm install ansible
-      - name: Check Ansible version
-        run: |    
-          ansible --version
-          ansible localhost -m ping
+      with:
+        repository: nguyentan11/github-action
+        ref: 'test' 
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+    - name: Install dependencies Including Ansible
+      run: |
+        npm install ansible
+    - name: Check Ansible version
+      run: |    
+        ansible --version
+        ansible localhost -m ping
     - name: destroy tf
       run: terraform destroy -auto-approve -lock=false
 
