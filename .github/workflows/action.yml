@@ -52,9 +52,15 @@ jobs:
       run: |
         npm install ansible
     - name: Check Ansible version
-      run: |    
+      run: |
         ansible --version
         ansible localhost -m ping
+    - name: Create Ansible inventory
+      run: |
+        echo '[linux]'' > inventory
+    - name: check inventory
+      run: |
+        cat inventory
     - name: destroy tf
       run: terraform destroy -auto-approve -lock=false
 
