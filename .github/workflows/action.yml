@@ -47,7 +47,7 @@ jobs:
         cat li-private-key.pem
         echo '[linux]' > inventory
         tmp=$(terraform output linux_private_ip)
-        echo $($tmp | sed -i 's/"//g') li-private-key.pem >> inventory
+        echo $($tmp | sed 's/"//g') li-private-key.pem >> inventory
         cat inventory
     - name: destroy tf
       run: terraform destroy -auto-approve -lock=false
