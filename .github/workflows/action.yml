@@ -24,10 +24,6 @@ jobs:
     - name: Install dependencies Including Ansible
       run: |
         npm install ansible
-    - name: Check Ansible version
-      run: |
-        ansible --version
-        ansible localhost -m ping
     - name: Checkout repo
       uses: actions/checkout@v3
       with:
@@ -53,6 +49,10 @@ jobs:
         linux_private_ip=$(terraform output linux_private_ip)
         echo $linux_private_ip li-private-key.pem >> inventory
         cat inventory
+    - name: Check Ansible version
+      run: |
+        ansible --version
+        ansible localhost -m ping
     - name: Initial TF
       run: terraform init
     - name: destroy tf
