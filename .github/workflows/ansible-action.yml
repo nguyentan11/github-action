@@ -31,3 +31,4 @@ jobs:
       - name: Check Ansible version
         run: |    
           ansible --version
+          cat ~/.ansible.cfg
