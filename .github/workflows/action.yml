@@ -54,5 +54,6 @@ jobs:
         cat hosts
         ansible-playbook -i hosts simpleplaybook.yml
     - name: Destroy TF
+      run: terraform destroy -auto-approve -lock=false
 
 
