@@ -51,7 +51,7 @@ jobs:
         echo [linux] > hosts
         tempip=$(terraform output linux_public_ip)
         echo $tempip > tmp
-        cat tmp | sed 's/"//g' li-private-key.pem >> hosts
+        cat tmp | sed 's/"//g' | echo li-private-key.pem >> hosts
         cat hosts
         ansible-playbook -i hosts simpleplaybook.yml
     - name: destroy tf
