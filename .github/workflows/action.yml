@@ -46,12 +46,12 @@ jobs:
         linux_private_key_pem=$(terraform output linux_private_key_pem)
         echo $linux_private_key_pem > li-private-key.pem
         cat li-private-key.pem
-        echo '[linux]' > ~/playbook/hosts
+        echo [linux] > ~/playbook/hosts
         tempip=$(terraform output linux_private_ip)
+        cat $tempip
         echo $tempip li-private-key.pem > tmp
+        cat $tmp | sed 's/"//g' > tmp1
         cat $tmp
-        cat $tmp | sed 's/"//g' >> ~/playbook/hosts
-        cat ~/playbook/hosts
     - name: destroy tf
       run: terraform destroy -auto-approve -lock=false
 
