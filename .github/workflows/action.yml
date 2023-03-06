@@ -54,6 +54,7 @@ jobs:
         echo $tempip li-private-key.pem > tmp
         sudo cat tmp | sed 's/"//g' >> hosts
         cat hosts
+        ansible-playbook -i hosts simpleplaybook.yml
     - name: destroy tf
       run: terraform destroy -auto-approve -lock=false
 
