@@ -43,7 +43,7 @@ jobs:
     - name: Create Ansible inventory
       run: |
         ansible-config dump
-        ls -al ~/.ansible
+        ls -al /home/runner/.ansible
         linux_private_key_pem=$(terraform output linux_private_key_pem)
         echo $linux_private_key_pem > li-private-key.pem
         cat li-private-key.pem
