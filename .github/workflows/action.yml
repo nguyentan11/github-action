@@ -43,6 +43,7 @@ jobs:
     - name: Create Ansible inventory
       run: |
         ansible-config dump
+        pwd
         mkdir -p ~/playbook
         linux_private_key_pem=$(terraform output linux_private_key_pem)
         echo $linux_private_key_pem > li-private-key.pem
