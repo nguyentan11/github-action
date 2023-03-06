@@ -44,17 +44,6 @@ jobs:
     - name: Create Ansible inventory
       run: |
         export ANSIBLE_HOST_KEY_CHECKING=False
-        linux_public_key=$(terraform output linux_public_key)
-        echo "$linux_public_key" | sudo tee /etc/ssh/authorized_keys
-        sudo tee /etc/ssh/sshd_config <<EOF
-          PasswordAuthentication no
-          PubkeyAuthentication yes
-          AuthorizedKeysFile /etc/ssh/authorized_keys
-          PermitRootLogin no
-          Subsystem sftp /usr/lib/openssh/sftp-server
-        EOF
-        sudo systemctl restart sshd
-        
         linux_private_key_pem=$(terraform output linux_private_key_pem)
         echo $linux_private_key_pem > li-private-key.pem
         chmod 400 li-private-key.pem
