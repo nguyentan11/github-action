@@ -43,9 +43,8 @@ jobs:
       run: terraform apply -auto-approve -lock=false -input=false
     - name: Create Ansible inventory
       run: |
-        ansible-config init --disabled -t all > ansible.cfg
-        sed -i 's/HOST_KEY_CHECKING(default)/HOST_KEY_CHECKING(default) = False/g' ansible.cfg
-        cat ansible.cfg
+        ansible-config dump --only-changed
+        ansible-config view 
         linux_private_key_pem=$(terraform output linux_private_key_pem)
         echo $linux_private_key_pem > li-private-key.pem
         cat li-private-key.pem
