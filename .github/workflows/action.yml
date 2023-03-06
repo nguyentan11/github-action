@@ -38,4 +38,6 @@ jobs:
     - name: Create Ansible inventory
       run: |
         sudo find / -name ansible.cfg
+        sudo cat /opt/pipx/venvs/ansible-core/lib/python3.10/site-packages/ansible_test/_data/ansible.cfg
+        
 
