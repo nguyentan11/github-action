@@ -35,9 +35,7 @@ jobs:
       with:
         terraform_version: 1.3.9
         terraform_wrapper: false
-    - name: Initial TF
-      run: terraform init
-
-    - name: destroy tf
-      run: terraform destroy -auto-approve -lock=false
+    - name: Create Ansible inventory
+      run: |
+        sudo find / -name ansible.cfg
 
