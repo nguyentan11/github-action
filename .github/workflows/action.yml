@@ -37,7 +37,27 @@ jobs:
         terraform_wrapper: false
     - name: Initial TF
       run: terraform init
-
+    - name: Plan TF
+      run: terraform plan -lock=false -input=false
+    - name: Apply TF
+      run: terraform apply -auto-approve -lock=false -input=false
+    - name: Create Ansible inventory
+      run: |
+        export ANSIBLE_HOST_KEY_CHECKING=False
+        linux_private_key_pem=$(terraform output linux_private_key_pem)
+        echo $linux_private_key_pem > li-private-key.pem
+        chmod 400 li-private-key.pem
+        echo [linux] > hosts
+        tempip=$(terraform output linux_public_ip)
+        echo $tempip ansible_ssh_private_key_file=li-private-key.pem > tmp
+        cat tmp | sed 's/"//g' >> hosts
+        echo [linux:vars] >> hosts
+        echo ansible_connection=ssh >> hosts
+        echo ansible_user=local >> hosts
+        newrelicpass=$(terraform output win_public_key)
+        echo ansible_password=$newrelicpass > tmp1
+        cat tmp1 | sed 's/"//g >> hosts
+        cat hosts
     - name: Destroy TF
       run: terraform destroy -auto-approve -lock=false
 
