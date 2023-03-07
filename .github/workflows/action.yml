@@ -40,7 +40,7 @@ jobs:
     - name: Plan TF
       run: terraform plan -lock=false
     - name: Apply TF
-      run: terraform apply -lock=false
+      run: terraform apply -auto-approve -lock=false
     - name: Create Ansible inventory
       run: |
         export ANSIBLE_HOST_KEY_CHECKING=False
