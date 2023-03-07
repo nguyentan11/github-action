@@ -53,7 +53,7 @@ jobs:
         cat tmp | sed 's/"//g' >> hosts
         cat hosts
         ls -al
-        ansible $tempip -m ping
+        ansible -i hosts -m ping
     - name: Destroy TF
       run: terraform destroy -auto-approve -lock=false
 
