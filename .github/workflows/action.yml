@@ -41,20 +41,9 @@ jobs:
       run: terraform plan -lock=false -input=false
     - name: Apply TF
       run: terraform apply -auto-approve -lock=false -input=false
-    - name: Run playbook
-      uses: dawidd6/action-ansible-playbook@v2
-      with:
-        # Required, playbook filepath
-        playbook: simpleplaybook.yml
-        # Optional, directory where playbooks live
-        directory: ./
-        # Optional, SSH private key
-        key: $(terraform output linux_private_key_pem)
-        # Optional, literal inventory file contents
-        inventory: |
-          [linux]
-          $(terraform output linux_public_ip)
-
+    - name: test
+      run: |
+        echo ${{ env.ANSIBLE_INVENTORY }}
     - name: Destroy TF
       run: terraform destroy -auto-approve -lock=false
 
