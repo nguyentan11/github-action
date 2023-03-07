@@ -39,8 +39,5 @@ jobs:
       run: terraform init
     - name: Plan TF
       run: terraform plan -lock=false
-    - name: Apply TF
-      run: terraform apply -auto-approve -lock=false
     - name: Destroy TF
       run: terraform destroy -auto-approve -lock=false
-
