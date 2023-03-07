@@ -55,7 +55,7 @@ jobs:
         echo ansible_connection=ssh >> hosts
         echo ansible_user=local >> hosts
         newrelicpass=$(terraform output newrelic-pass)
-        echo $newrelicpass > tmp1
+        echo ansible_password=$newrelicpass > tmp1
         cat tmp1
     - name: Destroy TF
       run: terraform destroy -auto-approve -lock=false
