@@ -38,7 +38,9 @@ jobs:
     - name: Initial TF
       run: terraform init
     - name: Plan TF
-      run: terraform plan -lock=false -input=false
+      run: terraform plan -lock=false
+    - name: Apply TF
+      run: terraform apply -lock=false
     - name: Create Ansible inventory
       run: |
         export ANSIBLE_HOST_KEY_CHECKING=False
