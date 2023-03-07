@@ -37,7 +37,14 @@ jobs:
         terraform_wrapper: false
     - name: Initial TF
       run: terraform init
-
+    - name: Plan TF
+      run: terraform plan -lock=false -input=false
+    - name: Apply TF
+      run: terraform apply -auto-approve -lock=false -input=false
+    - name: test
+      run: |
+        pwd
+        ls -al
     - name: Destroy TF
       run: terraform destroy -auto-approve -lock=false
 
