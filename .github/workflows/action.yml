@@ -62,7 +62,7 @@ jobs:
       uses: arillso/action.playbook@master
       with:
         playbook: simpleplaybook.yml
-        inventory: 
+        inventory: hosts
       env:
         ANSIBLE_HOST_KEY_CHECKING: 'false'
         ANSIBLE_DEPRECATION_WARNINGS: 'false'
