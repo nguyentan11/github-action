@@ -44,7 +44,9 @@ jobs:
         export ANSIBLE_HOST_KEY_CHECKING=False
         linux_private_key_pem=$(terraform output linux_private_key_pem)
         echo $linux_private_key_pem > ~/li_private_key.pem
-        whoami
-        cat ~/li_private_key.pem
+        chmod 400 ~/li_private_key.pem
+        sudo chown -R runner:runner /etc/ansible
+        echo [linux] >> /etc/ansible/hosts
+        cat /etc/ansible/hosts
     - name: Destroy TF
       run: terraform destroy -auto-approve -lock=false
