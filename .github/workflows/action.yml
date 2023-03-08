@@ -54,7 +54,7 @@ jobs:
         ssh -V
         openssl version -a
         linuxip=`echo $tempip | sed 's/"//g'`
+        sudo cat /etc/ssh/sshd_config | sudo sed 's/#GSSAPIAuthentication no/GSSAPIAuthentication no/g' > /etc/ssh/sshd_config
         sudo cat /etc/ssh/sshd_config
-        
     - name: Destroy TF
       run: terraform destroy -auto-approve -lock=false
