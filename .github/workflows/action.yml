@@ -49,6 +49,6 @@ jobs:
         linuxip=$(terraform output linux_public_ip)
         echo $linuxip
         echo $linux_private_key_pem > li-private-key.pem
-
+        ansible --version
     - name: Destroy TF
       run: terraform destroy -auto-approve -lock=false
