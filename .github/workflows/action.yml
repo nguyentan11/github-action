@@ -23,10 +23,6 @@ jobs:
         sudo apt install software-properties-common
         sudo add-apt-repository --yes --update ppa:ansible/ansible
         sudo apt install ansible
-    - name: Update SSH
-      run: |
-        sudo apt-get install openssh-server
-        sudo service ssh restart
     - name: Checkout repo
       uses: actions/checkout@v3
       with:
@@ -49,7 +45,6 @@ jobs:
         linux_private_key_pem=$(terraform output linux_private_key_pem)
         echo $linux_private_key_pem > ~/li_private_key.pem
         chmod 400 ~/li_private_key.pem
-        cat ~/li_private_key.pem
         ls -al
         sudo chown -R runner:runner /etc/ansible
         echo [linux] >> /etc/ansible/hosts
@@ -58,5 +53,6 @@ jobs:
         cat tmp | sed 's/"//g' >> /etc/ansible/hosts
         cat /etc/ansible/hosts
         ssh -V
+        openssl version -a
     - name: Destroy TF
       run: terraform destroy -auto-approve -lock=false
