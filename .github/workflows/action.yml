@@ -47,9 +47,8 @@ jobs:
         chmod 400 ~/li_private_key.pem
         sudo chown -R runner:runner /etc/ansible
         echo [linux] >> /etc/ansible/hosts
-        linux_public_ip=$(terraform output linux_public_ip)
-        echo $linux_public_ip ansible_ssh_private_key_file=~/li_private_key.pem > tmp
+        tempip=$(terraform output linux_public_ip)
+        echo $tempip ansible_ssh_private_key_file=~/li_private_key.pem > tmp
         cat $tmp
-        cat /etc/ansible/hosts
     - name: Destroy TF
       run: terraform destroy -auto-approve -lock=false
