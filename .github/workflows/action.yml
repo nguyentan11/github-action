@@ -36,7 +36,7 @@ jobs:
     - name: Init TF
       run: terraform init -lock=false
     - name: Apply TF
-      run: terraform destroy -auto-approve -lock=false
+      run: terraform apply -auto-approve -lock=false
     - name: Create Ansible inventory
       run: |
         export ANSIBLE_HOST_KEY_CHECKING=False
@@ -44,7 +44,18 @@ jobs:
         mkdir -p ~/.ssh
         chmod 700 ~/.ssh
         echo $linux_private_key_pem > ~/.ssh/li_private_key.key
-        chmod 400 ~/.ssh/li_private_key.key
-        dos2unix ~/.ssh/li_private_key.key
-        ssh-keygen -f ~/.ssh/li_private_key.key -y > ~/.ssh/id_rsa.pub
+        chmod 600 ~/.ssh/li_private_key.key
+        sudo chown -R runner:runner /etc/ansible
+        echo [linux] >> /etc/ansible/hosts
+        tempip=$(terraform output linux_public_ip)
+        echo $tempip ansible_ssh_private_key_file=~/.ssh/li_private_key.key > tmp
+        cat tmp | sed 's/"//g' >> /etc/ansible/hosts
+        cat /etc/ansible/hosts
+        sudo sed -e 's/#GSSAPIAuthentication no/GSSAPIAuthentication no/' /etc/ssh/sshd_config
+        sudo cat /etc/ssh/sshd_config
+        sudo service ssh restart
+        linuxip=`echo $tempip | sed 's/"//g'`
+        ssh -i ~/.ssh/li_private_key.key -vT ec2-user@$linuxip -oStrictHostKeyChecking=no
+    - name: Destroy TF
+      run: terraform destroy -auto-approve -lock=false
 
