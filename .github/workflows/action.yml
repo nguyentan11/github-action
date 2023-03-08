@@ -33,6 +33,8 @@ jobs:
       with:
         terraform_version: 1.3.9
         terraform_wrapper: false
+    - name: Init TF
+      run: terraform init -lock=false
     - name: Create Ansible inventory
       run: |
         export ANSIBLE_HOST_KEY_CHECKING=False
