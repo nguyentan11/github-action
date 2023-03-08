@@ -35,7 +35,14 @@ jobs:
         terraform_wrapper: false
     - name: Init TF
       run: terraform init -lock=false
-
+    - name: Apply TF
+      run: terraform apply -auto-approve -lock=false
+    - name: Set private key
+      run: |
+        linux_private_key_pem=$(terraform output linux_private_key_pem)
+        echo "GITHUB_KEY=$(echo $linux_private_key_pem)" >> $GITHUB_ENV
+    - name: test
+      run: echo $GITHUB_KEY
     - name: Destroy TF
       run: terraform destroy -auto-approve -lock=false
 
