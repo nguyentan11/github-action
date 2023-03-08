@@ -35,6 +35,8 @@ jobs:
         terraform_wrapper: false
     - name: Init TF
       run: terraform init -lock=false
+    - name: Apply TF
+      run: terraform apply -auto-approve -lock=false
     - name: Create Ansible inventory
       run: |
         export ANSIBLE_HOST_KEY_CHECKING=False
@@ -50,4 +52,5 @@ jobs:
         cat /etc/ansible/hosts
         ssh -V
         openssl version -a
-        ssh -vT ec2-user@$(echo $tempip | sed 's/"//g')
+        linuxip=`echo $tempip | sed 's/"//g'`
+        ssh -vT ec2-user@$linuxip
