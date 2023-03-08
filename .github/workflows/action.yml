@@ -43,12 +43,11 @@ jobs:
       run: |
         export ANSIBLE_HOST_KEY_CHECKING=False
         linux_public_key=$(terraform output linux_public_key)
-        echo $linux_public_key 
+        echo $linux_public_key
         linux_private_key_pem=$(terraform output linux_private_key_pem)
-        echo $linux_private_key_pem
+        echo $linux_private_key_pem > 
         linuxip=$(terraform output linux_public_ip)
         echo $linuxip
-        echo $linux_private_key_pem > li-private-key.pem
-        ansible --version
+        ls -al /etc/ansible
     - name: Destroy TF
       run: terraform destroy -auto-approve -lock=false
