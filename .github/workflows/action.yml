@@ -35,6 +35,7 @@ jobs:
         terraform_wrapper: false
     - name: Init TF
       run: terraform init -lock=false
-
-    - name: Destroy TF
-      run: terraform destroy -auto-approve -lock=false
+    - name: Create Ansible inventory
+      run: |
+        export ANSIBLE_HOST_KEY_CHECKING=False
+        ls ~/.ssh
