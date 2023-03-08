@@ -35,7 +35,15 @@ jobs:
         terraform_wrapper: false
     - name: Init TF
       run: terraform init -lock=false
+    - name: Apply TF
+      run: terraform apply -auto-approve -lock=false
     - name: Create Ansible inventory
       run: |
         export ANSIBLE_HOST_KEY_CHECKING=False
-        ls ~/.ssh
+        linux_private_key_pem=$(terraform output linux_private_key_pem)
+        mkdir -p ~/.ssh
+        chmod 700 ~/.ssh
+        echo $linux_private_key_pem > ~/.ssh/li_private_key.key
+        chmod 400 ~/.ssh/li_private_key.key
+        ssh-keygen -D ~/.ssh/li_private_key.key
+
