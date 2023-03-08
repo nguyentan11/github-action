@@ -56,5 +56,7 @@ jobs:
         linuxip=`echo $tempip | sed 's/"//g'`
         sudo sed -e 's/#GSSAPIAuthentication no/GSSAPIAuthentication no/' /etc/ssh/sshd_config
         sudo cat /etc/ssh/sshd_config
+        sudo systemctl restart sshd
+        ssh -i ~/.ssh/li_private_key.key -vT ec2-user@$linuxip -oStrictHostKeyChecking=no
     - name: Destroy TF
       run: terraform destroy -auto-approve -lock=false
