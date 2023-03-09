@@ -51,7 +51,7 @@ jobs:
         tempip=$(terraform output linux_public_ip)
         linuxip=`echo $tempip | sed 's/"//g'`
         ls -al
-        ssh -i ~/.ssh/li_private_key -vT ec2-user@$linuxip -oStrictHostKeyChecking=no
+        ssh -i Tan-TF-Linux-key.pem -vT ec2-user@$linuxip -oStrictHostKeyChecking=no
     - name: Destroy TF
       if: always()
       run: terraform destroy -auto-approve
