@@ -47,9 +47,10 @@ jobs:
         chmod 700 ~/.ssh
         echo $GITHUB_ENV > ~/.ssh/li_private_key
         chmod 600 ~/.ssh/li_private_key
+        cat ~/.ssh/li_private_key
         tempip=$(terraform output linux_public_ip)
         linuxip=`echo $tempip | sed 's/"//g'`
-        ssh -i ~/.ssh/li_private_key ec2-user@$linuxip
+        ssh -i ~/.ssh/li_private_key -vT ec2-user@$linuxip
     - name: Destroy TF
       if: always()
       run: terraform destroy -auto-approve
