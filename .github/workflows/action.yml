@@ -46,16 +46,11 @@ jobs:
       run: terraform init
     - name: Apply TF
       run: terraform apply -auto-approve
-    - name: Add Ansible hosts
+    - name: Set key permission
       run: |
         chmod 600 Tan-TF-Linux-key.pem
         cat Tan-TF-Linux-key.pem
     - name: Run Ansible playbook
       run: | 
         export ANSIBLE_HOST_KEY_CHECKING=False
-        ansible-playbook -i /etc/ansible/hosts ansible-playbook/li-nrplaybook.yml
-
-
-
-
-
+        ansible-playbook -i inventory ansible-playbook/li-nrplaybook.yml
