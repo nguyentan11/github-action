@@ -23,11 +23,17 @@ jobs:
         sudo apt install software-properties-common -y
         sudo add-apt-repository --yes --update ppa:ansible/ansible
         sudo apt install ansible -y
-    - name: Checkout repo
+    - name: Checkout Terraform repo
       uses: actions/checkout@v3
       with:
         repository: nguyentan11/fsoft-lab1
         ref: 'test'
+    - name: Checkout Ansible repo
+      uses: actions/checkout@v3
+      with:
+        repository: nguyentan11/ansible-playbook
+        ref: 'test'
+        path: 'ansible-playbook'
     - name: Specific terraform version
       uses: hashicorp/setup-terraform@v2
       with:
@@ -37,7 +43,7 @@ jobs:
       run: terraform init
     - name: Apply TF
       run: terraform apply -auto-approve
-    - name: Run Ansible playbook
+    - name: Add Ansible hosts
       run: |
         export ANSIBLE_HOST_KEY_CHECKING=False
         ls -al
@@ -49,7 +55,8 @@ jobs:
         echo $tempip ansible_ssh_private_key_file=Tan-TF-Linux-key.pem > tmp
         cat tmp | sed 's/"//g' >> /etc/ansible/hosts
         cat /etc/ansible/hosts
-        ansible-playbook -i /etc/ansible/hosts simpleplaybook.yml
+    - name: Destroy TF
+      run: terraform destroy -auto-approve
 
 
 
