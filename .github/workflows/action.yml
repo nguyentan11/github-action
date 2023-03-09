@@ -47,6 +47,7 @@ jobs:
       run: |
         export ANSIBLE_HOST_KEY_CHECKING=False
         ls -al
+        ls -al ansible-playbook
         chmod 600 Tan-TF-Linux-key.pem
         cat Tan-TF-Linux-key.pem
         sudo chown -R runner:runner /etc/ansible
