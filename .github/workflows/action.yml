@@ -36,20 +36,7 @@ jobs:
     - name: Init TF
       run: terraform init
     - name: Apply TF
-      run: terraform apply -auto-approve
-    - name: Set private key
-      run: |
-        linux_private_key_pem=$(terraform output linux_private_key_pem)
-        echo "GITHUB_KEY=$(echo $linux_private_key_pem)" >> $GITHUB_ENV
-    - name: Test SSH
-      run: |
-        mkdir -p ~/.ssh
-        chmod 700 ~/.ssh
-        echo $GITHUB_ENV > ~/.ssh/li_private_key
-        chmod 600 ~/.ssh/li_private_key
-        tempip=$(terraform output linux_public_ip)
-        linuxip=`echo $tempip | sed 's/"//g'`
-        ssh -i ~/.ssh/li_private_key ec2-user@linuxip
+      run: terraform destroy -auto-approve
 
 
 
