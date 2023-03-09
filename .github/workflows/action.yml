@@ -25,26 +25,7 @@ jobs:
         sudo apt install ansible -y
         ansible-galaxy collection install ansible.windows
         ansible-galaxy collection install community.windows
-    - name: Checkout Terraform repo
-      uses: actions/checkout@v3
-      with:
-        repository: nguyentan11/fsoft-lab1
-        ref: 'test'
-    - name: Specific terraform version
-      uses: hashicorp/setup-terraform@v2
-      with:
-        terraform_version: 1.3.9
-        terraform_wrapper: false
-    - name: Init TF
-      run: terraform init
-    - name: Apply TF
-      run: terraform apply -auto-approve
-    - name: Set key permission
-      run: |
-        chmod 600 Tan-TF-Linux-key
-        cat Tan-TF-Linux-key
-        chmod 600 Tan-TF-Windows-key
-        cat Tan-TF-Windows-key
+
     - name: Run Ansible playbook
       run: | 
         export ANSIBLE_HOST_KEY_CHECKING=False
