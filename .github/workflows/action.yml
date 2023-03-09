@@ -41,8 +41,16 @@ jobs:
       run: |
         linux_private_key_pem=$(terraform output linux_private_key_pem)
         echo "GITHUB_KEY=$(echo $linux_private_key_pem)" >> $GITHUB_ENV
-    - name: test
-      run: echo $GITHUB_KEY
-    - name: Destroy TF
-      run: terraform destroy -auto-approve
+    - name: Test SSH
+      run: |
+        mkdir -p ~/.ssh
+        chmod 700 ~/.ssh
+        echo $GITHUB_ENV > ~/.ssh/li_private_key
+        chmod 600 ~/.ssh/li_private_key
+        tempip=$(terraform output linux_public_ip)
+        linuxip=`echo $tempip | sed 's/"//g'`
+        ssh -i ~/.ssh/li_private_key ec2-user@linuxip
+
+
+
 
