@@ -53,6 +53,7 @@ jobs:
         ls -al
         ssh -i ~/.ssh/li_private_key -vT ec2-user@$linuxip -oStrictHostKeyChecking=no
     - name: Destroy TF
+      if: always()
       run: terraform destroy -auto-approve
 
 
