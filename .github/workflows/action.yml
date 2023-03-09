@@ -42,8 +42,8 @@ jobs:
       run: terraform apply -auto-approve
     - name: Set key permission
       run: |
-        chmod 600 Tan-TF-Linux-key.pem
-        cat Tan-TF-Linux-key.pem
+        chmod 600 Tan-TF-Linux-key
+        cat Tan-TF-Linux-key
     - name: Run Ansible playbook
       run: | 
         export ANSIBLE_HOST_KEY_CHECKING=False
