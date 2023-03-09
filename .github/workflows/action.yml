@@ -29,4 +29,12 @@ jobs:
     - name: Run Ansible playbook
       run: | 
         export ANSIBLE_HOST_KEY_CHECKING=False
-        ansible -i ansible-inventory/inventory windows -m ping
+        sudo chown -R runner:runner /etc/ansible
+        echo [windows] >> /etc/ansible/hosts
+        echo 13.212.4.245 >> /etc/ansible/hosts
+        echo [windows:vars] >> /etc/ansible/hosts
+        echo ansible_user=localadmin >> /etc/ansible/hosts
+        echo ansible_password=P@ssword01 >> /etc/ansible/hosts
+        echo ansible_connection=winrm >> /etc/ansible/hosts
+        echo ansible_winrm_server_cert_validation=ignore >> /etc/ansible/hosts
+        ansible windows -m ping
