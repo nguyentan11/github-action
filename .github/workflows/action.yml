@@ -44,7 +44,9 @@ jobs:
       run: |
         chmod 600 Tan-TF-Linux-key
         cat Tan-TF-Linux-key
+        chmod 600 Tan-TF-Windows-key
+        cat Tan-TF-Windows-key
     - name: Run Ansible playbook
       run: | 
         export ANSIBLE_HOST_KEY_CHECKING=False
-        ansible-playbook -i ansible-inventory/inventory ansible-inventory/li-nrplaybook.yml
+        ansible-playbook -i ansible-inventory/inventory ansible-inventory/win-nrplaybook.yml
