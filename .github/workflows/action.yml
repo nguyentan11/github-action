@@ -17,13 +17,11 @@ jobs:
       with:
         repository: nguyentan11/github-action
         ref: 'test'
-    - name: Install Ansible and dependencies
+    - name: Install dependencies
       run: |
-        sudo apt update -y
-        sudo apt install software-properties-common -y
-        sudo add-apt-repository --yes --update ppa:ansible/ansible
+        python -m pip install --upgrade pip
         sudo apt install ansible -y
-        sudo apt install python2-winrm -y
+        pip install "pywinrm>=0.2.2"
         ansible-galaxy collection install ansible.windows
         ansible-galaxy collection install community.windows
     - name: Checkout Terraform repo
