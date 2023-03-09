@@ -51,6 +51,7 @@ jobs:
         tempip=$(terraform output linux_public_ip)
         linuxip=`echo $tempip | sed 's/"//g'`
         ls -al
+        chmod 600 Tan-TF-Linux-key.pem
         ssh -i Tan-TF-Linux-key.pem -vT ec2-user@$linuxip -oStrictHostKeyChecking=no
     - name: Destroy TF
       if: always()
