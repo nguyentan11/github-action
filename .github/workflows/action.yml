@@ -31,12 +31,6 @@ jobs:
       with:
         repository: nguyentan11/fsoft-lab1
         ref: 'test'
-    - name: Checkout Ansible repo
-      uses: actions/checkout@v3
-      with:
-        repository: nguyentan11/ansible-playbook
-        ref: 'test'
-        path: 'ansible-playbook'
     - name: Specific terraform version
       uses: hashicorp/setup-terraform@v2
       with:
@@ -53,4 +47,4 @@ jobs:
     - name: Run Ansible playbook
       run: | 
         export ANSIBLE_HOST_KEY_CHECKING=False
-        ansible-playbook -i inventory ansible-playbook/li-nrplaybook.yml
+        ansible-playbook -i ansible-inventory/inventory ansible-inventory/li-nrplaybook.yml
