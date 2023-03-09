@@ -23,18 +23,16 @@ jobs:
         sudo apt install software-properties-common -y
         sudo add-apt-repository --yes --update ppa:ansible/ansible
         sudo apt install ansible -y
+        sudo apt install python2-winrm -y
         ansible-galaxy collection install ansible.windows
         ansible-galaxy collection install community.windows
-
-    - name: Run Ansible playbook
-      run: | 
-        export ANSIBLE_HOST_KEY_CHECKING=False
-        sudo chown -R runner:runner /etc/ansible
-        echo [windows] >> /etc/ansible/hosts
-        echo 13.212.4.245 >> /etc/ansible/hosts
-        echo [windows:vars] >> /etc/ansible/hosts
-        echo ansible_user=localadmin >> /etc/ansible/hosts
-        echo ansible_password=P@ssword01 >> /etc/ansible/hosts
-        echo ansible_connection=winrm >> /etc/ansible/hosts
-        echo ansible_winrm_server_cert_validation=ignore >> /etc/ansible/hosts
-        ansible windows -m ping
+    - name: Checkout Terraform repo
+      uses: actions/checkout@v3
+      with:
+        repository: nguyentan11/fsoft-lab1
+        ref: 'test'
+    - name: Specific terraform version
+      uses: hashicorp/setup-terraform@v2
+      with:
+        terraform_version: 1.3.9
+        terraform_wrapper: false
