@@ -23,7 +23,7 @@ jobs:
         sudo apt install software-properties-common -y
         sudo add-apt-repository --yes --update ppa:ansible/ansible
         sudo apt install ansible -y
-        sudo apt install python3-winrm.noarch -y"
+        sudo apt install python3-winrm -y
         ansible-galaxy collection install ansible.windows
         ansible-galaxy collection install community.windows
     - name: Checkout Terraform repo
