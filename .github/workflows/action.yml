@@ -57,6 +57,7 @@ jobs:
         cat tmp | sed 's/"//g' >> /etc/ansible/hosts
         cat /etc/ansible/hosts
         ansible-playbook -i /etc/ansible/hosts ansible-playbook/li-nrplaybook.yml
+        
 
 
 
