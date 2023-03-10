@@ -40,7 +40,7 @@ jobs:
       run: terraform apply -auto-approve
     - name: Test
       run: |
-        cat Tan-TF-Windows-ssh-key
+        cat Tan-TF-Windows-key
         export ANSIBLE_HOST_KEY_CHECKING=False
         ls -al
         ansible -i ansible-inventory/inventory windows -m ping
