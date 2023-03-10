@@ -27,8 +27,7 @@ jobs:
         python -V
         curl https://bootstrap.pypa.io/pip/2.7/get-pip.py --output get-pip.py
         sudo python get-pip.py
-        pip -v
-
+        pip -V
     - name: Checkout Terraform repo
       uses: actions/checkout@v3
       with:
