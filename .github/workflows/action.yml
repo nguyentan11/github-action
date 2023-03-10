@@ -43,7 +43,7 @@ jobs:
       run: |
         cat Tan-TF-Windows-key
         export ANSIBLE_HOST_KEY_CHECKING=False
-        $tmpip=$(terraform output windows_public_ip)
+        tmpip=$(terraform output windows_public_ip)
         cat $tmpip
     - name: Destroy TF
       if: always()
