@@ -23,6 +23,7 @@ jobs:
         pip -V
         pip install pywinrm
         pip install ansible
+        ansible --version
     - name: Checkout Terraform repo
       uses: actions/checkout@v3
       with:
