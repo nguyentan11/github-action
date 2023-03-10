@@ -28,6 +28,7 @@ jobs:
         curl https://bootstrap.pypa.io/pip/2.7/get-pip.py --output get-pip.py
         sudo python get-pip.py
         pip -V
+        pip install pywinrm
     - name: Checkout Terraform repo
       uses: actions/checkout@v3
       with:
