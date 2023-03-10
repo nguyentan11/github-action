@@ -29,6 +29,7 @@ jobs:
         sudo python get-pip.py
         pip -V
         pip install pywinrm
+        pip install ansible
     - name: Checkout Terraform repo
       uses: actions/checkout@v3
       with:
