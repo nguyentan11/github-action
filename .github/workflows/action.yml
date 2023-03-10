@@ -49,7 +49,6 @@ jobs:
         cat Tan-TF-Windows-key
         export ANSIBLE_HOST_KEY_CHECKING=False
         ls -l
-        ansible --version
         ansible -i ansible-inventory/inventory windows -m ping
     - name: Destroy TF
       if: always()
