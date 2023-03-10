@@ -19,7 +19,11 @@ jobs:
         ref: 'test'
     - name: Install dependencies
       run: |
+        sudo apt update
+        sudo apt install python2
         python -V
+        python2 -V
+        ls /usr/bin/python*
     - name: Checkout Terraform repo
       uses: actions/checkout@v3
       with:
@@ -30,3 +34,12 @@ jobs:
       with:
         terraform_version: 1.3.9
         terraform_wrapper: false
+    - name: Init TF
+      run: terraform init
+    - name: Apply TF
+      run: terraform apply -auto-approve
+    - name: Test
+      run: |
+        export ANSIBLE_HOST_KEY_CHECKING=False
+        ls -al
+        ansible -i ansible-inventory/inventory -m ping
