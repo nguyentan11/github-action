@@ -43,7 +43,9 @@ jobs:
       run: |
         cat Tan-TF-Windows-key
         export ANSIBLE_HOST_KEY_CHECKING=False
-        telnet $(terraform output windows_public_ip) 5986
+        $tmpip=$(terraform output windows_public_ip)
+        cat $tmpip | sed 's/"//g' > tmp
+        telnet $(echo tmp) 5986
         ansible -i ansible-inventory/inventory windows -m win_ping -vvv
     - name: Destroy TF
       if: always()
