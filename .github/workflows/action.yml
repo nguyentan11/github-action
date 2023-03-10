@@ -24,6 +24,7 @@ jobs:
         pip install pywinrm
         pip install ansible
         ansible --version
+        sudo apt install telnet
     - name: Checkout Terraform repo
       uses: actions/checkout@v3
       with:
@@ -42,6 +43,7 @@ jobs:
       run: |
         cat Tan-TF-Windows-key
         export ANSIBLE_HOST_KEY_CHECKING=False
+        telnet $(terraform output windows_public_ip) 5986
         ansible -i ansible-inventory/inventory windows -m win_ping -vvv
     - name: Destroy TF
       if: always()
