@@ -22,7 +22,9 @@ jobs:
         sudo apt update
         sudo apt install python2
         ls /usr/bin/python*
-        python -V        
+        python -V
+        sudo update-alternatives --install /usr/bin/python python /usr/bin/python2 0
+        python -V
     - name: Checkout Terraform repo
       uses: actions/checkout@v3
       with:
