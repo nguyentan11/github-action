@@ -20,13 +20,8 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt update
-        sudo apt install python2
-        ls /usr/bin/python*
-        python -V
-        sudo update-alternatives --install /usr/bin/python python /usr/bin/python2 0
-        python -V
-        pip --version
-        pip install python2-winrm
+        sudo apt install ansible
+        sudo pip install pywinrm
     - name: Checkout Terraform repo
       uses: actions/checkout@v3
       with:
