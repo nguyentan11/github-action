@@ -25,6 +25,7 @@ jobs:
         python -V
         sudo update-alternatives --install /usr/bin/python python /usr/bin/python2 0
         python -V
+        pip --version
     - name: Checkout Terraform repo
       uses: actions/checkout@v3
       with:
