@@ -44,7 +44,7 @@ jobs:
         cat Tan-TF-Windows-key
         export ANSIBLE_HOST_KEY_CHECKING=False
         $tmpip=$(terraform output windows_public_ip)
-        echo $tmpip
+        cat $tmpip
     - name: Destroy TF
       if: always()
       run: terraform destroy -auto-approve
