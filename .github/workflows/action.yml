@@ -19,7 +19,7 @@ jobs:
         ref: 'test'
     - name: Install dependencies
       run: |
-        python -v
+        python -V
     - name: Checkout Terraform repo
       uses: actions/checkout@v3
       with:
