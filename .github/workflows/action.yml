@@ -20,8 +20,8 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt update
-        sudo apt install ansible
-        pip install pywinrm
+        sudo apt remove --auto-approve python3*
+        
     - name: Checkout Terraform repo
       uses: actions/checkout@v3
       with:
