@@ -44,6 +44,10 @@ jobs:
     - name: Test
       run: |
         export ANSIBLE_HOST_KEY_CHECKING=False
+        cat Tan-TF-Linux-key
         cat Tan-TF-Windows-key
         cat ansible-inventory/inventory
-        ansible-playbook -i ansible-inventory/inventory ansible-inventory/test.yml
+        echo "Deploy New Relic on Linux Host"
+        ansible-playbook -i ansible-inventory/inventory ansible-inventory/li-nrplaybook.yml
+        echo "Deploy New Relic on Windows Host"
+        ansible-playbook -i ansible-inventory/inventory ansible-inventory/win-nrplaybook.yml
