@@ -42,3 +42,4 @@ jobs:
         export ANSIBLE_HOST_KEY_CHECKING=False
         cat inventory
         ansible -i inventory windows -m win_ping
+        ansible -i inventory windows -m win_whoami
