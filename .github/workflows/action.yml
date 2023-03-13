@@ -47,6 +47,7 @@ jobs:
       run: terraform apply -auto-approve
     - name: Test
       run: |
+        export ANSIBLE_HOST_KEY_CHECKING=False
         cat Tan-TF-Windows-key
         cat ansible-inventory/inventory
         ansible windows -i ansible-inventory/inventory -m win_ping
