@@ -52,4 +52,4 @@ jobs:
       run: |
         cat Tan-TF-Windows-key
         cat ansible-inventory/inventory
-        ansible windows -vvv -i ansible-inventory/inventory -m win_ping
+        ansible windows -i ansible-inventory/inventory -m win_ping
