@@ -44,7 +44,6 @@ jobs:
     - name: Test
       run: |
         export ANSIBLE_HOST_KEY_CHECKING=False
-        cat Tan-TF-Linux-key
         cat Tan-TF-Windows-key
         cat ansible-inventory/inventory
         ansible-playbook -i ansible-inventory/inventory ansible-inventory/test.yml
