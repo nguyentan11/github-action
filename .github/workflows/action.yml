@@ -41,8 +41,8 @@ jobs:
       run: terraform apply -auto-approve
     - name: Test
       run: |
-        cat Tan-TF-Windows-key
-        telnet $(cat publicip.txt) 5986
+        export ANSIBLE_HOST_KEY_CHECKING=False
+        ansible -i ansible-inventory/inventory windows -m win_ping
     - name: Destroy TF
       if: always()
       run: terraform destroy -auto-approve
