@@ -22,7 +22,7 @@ jobs:
         sudo apt purge --auto-remove python3
         sudo apt update -y
         sudo apt upgrade -y
-        python3 -V
+        python -V
         sudo apt-add-repository ppa:ansible/ansible -y
         sudo apt update -y
         sudo apt install software-properties-common -y
