@@ -27,23 +27,19 @@ jobs:
         python3 -m pip install pywinrm
         ansible-galaxy collection install ansible.windows
         ansible-galaxy collection install community.windows
-    - name: Checkout Terraform repo
-      uses: actions/checkout@v3
-      with:
-        repository: nguyentan11/fsoft-lab1
-        ref: 'test'
-    - name: Specific terraform version
-      uses: hashicorp/setup-terraform@v2
-      with:
-        terraform_version: 1.3.9
-        terraform_wrapper: false
-    - name: Init TF
-      run: terraform init
-    - name: Apply TF
-      run: terraform apply -auto-approve
+    - name: write inventory
+      run: |
+        echo [windows] > inventory
+        echo 13.229.53.73 >> inventory
+        echo [windows:vars] >> inventory
+        echo ansible_user=localadmin >> inventory
+        echo ansible_password=P@ssword01 >> inventory
+        echo ansible_connection=winrm >> inventory
+        echo ansible_winrm_server_cert_validation=ignore >> inventory
+        echo ansible_port=5986 >> inventory
     - name: Test
       run: |
         export ANSIBLE_HOST_KEY_CHECKING=False
         cat Tan-TF-Windows-key
-        cat ansible-inventory/inventory
-        ansible-playbook -i ansible-inventory/inventory ansible-inventory/test.yml
+        cat inventory
+        ansible -i inventory -m win_ping
