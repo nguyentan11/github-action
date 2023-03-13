@@ -42,7 +42,7 @@ jobs:
     - name: Test
       run: |
         cat Tan-TF-Windows-key
-        telnet $(terraform output windows_public_ip) 5986
+        telnet $(cat publicip.txt) 5986
     - name: Destroy TF
       if: always()
       run: terraform destroy -auto-approve
