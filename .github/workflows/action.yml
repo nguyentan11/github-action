@@ -41,7 +41,7 @@ jobs:
     - name: Test
       run: |
         export ANSIBLE_HOST_KEY_CHECKING=False
-        ansible -i ansible-inventory/inventory windows -m win_ping
+        ansible windows -vvv -i ansible-inventory/inventory -m win_ping
     - name: Destroy TF
       if: always()
       run: terraform destroy -auto-approve
