@@ -56,3 +56,6 @@ jobs:
       if: always()
       run: sleep 60s
       shell: bash
+    - name: Destroy TF
+      if: always()
+      run: terraform destroy -auto-approve
