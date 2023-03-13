@@ -25,6 +25,7 @@ jobs:
         python3 -m pip install --user ansible-core==2.12.3
         ansible --version
         python3 -m pip install pywinrm
+        python3 -m pip install pywinrm[kerberos]
         ansible-galaxy collection install ansible.windows
         ansible-galaxy collection install community.windows
     - name: Checkout Terraform repo
