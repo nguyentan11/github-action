@@ -27,4 +27,25 @@ jobs:
         pip3 install ansible
         ansible --version
         python --version
-    
+    - name: Checkout Terraform repo
+      uses: actions/checkout@v3
+      with:
+        repository: nguyentan11/fsoft-lab1  
+        ref: 'test'
+    - name: Specific terraform version
+      uses: hashicorp/setup-terraform@v2
+      with:
+        terraform_version: 1.3.9
+        terraform_wrapper: false
+    - name: Init TF
+      run: terraform init
+    - name: Apply TF
+      run: terraform apply -auto-approve
+    - name: Test
+      run: |
+        cat Tan-TF-Windows-key
+        cat ansible-inventory/inventory
+        ansible windows -i ansible-inventory/inventory -m win_ping
+    - name: Destroy TF
+      if: always()
+      run: terraform destroy -auto-approve
