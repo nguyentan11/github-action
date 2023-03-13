@@ -20,7 +20,7 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt update -y
-        sudo apt remove -auto-remove python -y
+        sudo apt remove --auto-remove python -y
         sudo apt install python2* -y
         ls /usr/bin/python*
         sudo update-alternatives --list python
