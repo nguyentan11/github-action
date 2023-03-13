@@ -25,25 +25,8 @@ jobs:
         python3 -m pip install --user ansible-core==2.12.3
         ansible --version
         python3 -m pip install pywinrm
-    - name: Checkout Terraform repo
-      uses: actions/checkout@v3
-      with:
-        repository: nguyentan11/fsoft-lab1
-        ref: 'test'
-    - name: Specific terraform version
-      uses: hashicorp/setup-terraform@v2
-      with:
-        terraform_version: 1.3.9
-        terraform_wrapper: false
-    - name: Init TF
-      run: terraform init
-    - name: Apply TF
-      run: terraform apply -auto-approve
-    - name: Test
-      run: |
-        export ANSIBLE_HOST_KEY_CHECKING=False
-        cat Tan-TF-Windows-key
-        cat ansible-inventory/inventory
-        ansible-playbook -i ansible-inventory/inventory ansible-inventory/test.yml
+        ansible-galaxy collection install ansible.windows
+        ansible-galaxy collection install community.windows
+
 
         
