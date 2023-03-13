@@ -22,13 +22,14 @@ jobs:
         sudo apt purge --auto-remove python3
         sudo apt update -y
         sudo apt upgrade -y
-        python -V
+        sudo add-apt-repository ppa:deadsnakes/ppa
+        sudo apt install python3.10
+        python3 -V
         sudo apt-add-repository ppa:ansible/ansible -y
         sudo apt update -y
         sudo apt install software-properties-common -y
         sudo apt install ansible -y
         ls /usr/bin/python*
         ansible --version
-        python --version
         sudo find / -name win_ping.ps1
     
