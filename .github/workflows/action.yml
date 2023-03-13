@@ -30,5 +30,6 @@ jobs:
         pip3 install ansible
         ansible --version
         python --version
-        ls -al /opt/pipx/venvs/ansible-core/lib/python3.10/site-packages/ansible
+        ls -al /opt/pipx/venvs/ansible-core/lib/python3.10/site-packages/ansible/modules/windows
+        cat /opt/pipx/venvs/ansible-core/lib/python3.10/site-packages/ansible/modules/windows/win_ping.ps1
     
