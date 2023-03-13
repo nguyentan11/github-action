@@ -22,7 +22,6 @@ jobs:
         sudo apt purge --auto-remove python3
         sudo apt update -y
         sudo apt upgrade -y
-        sudo apt-add-repository ppa:deadsnakes/ppa
         sudo apt install python3.10
         python3 -V
         sudo apt-add-repository ppa:ansible/ansible -y
