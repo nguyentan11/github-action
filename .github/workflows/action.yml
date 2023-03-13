@@ -24,6 +24,6 @@ jobs:
         python3 -m pip -V
         python3 -m pip install --user ansible-core==2.12.3
         ansible --version
-#        . /opt/pipx/venvs/ansible-core/bin/activate && /opt/pipx/venvs/ansible-core/bin/python -m pip install pywinrm
+        python3 -m pip install pywinrm
 
         
