@@ -44,6 +44,6 @@ jobs:
         export ANSIBLE_HOST_KEY_CHECKING=False
         cat Tan-TF-Windows-key
         cat ansible-inventory/inventory
-        ansible -i ansible-inventory/inventory ansible-inventory/test.yml
+        ansible-playbook -i ansible-inventory/inventory ansible-inventory/test.yml
 
         
