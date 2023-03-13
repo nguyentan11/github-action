@@ -19,7 +19,6 @@ jobs:
         ref: 'test'
     - name: Install dependencies
       run: |
-        sudo apt purge --auto-remove python3*
         sudo apt install software-properties-common -y
         sudo apt-add-repository ppa:deadsnakes/ppa -y
         sudo apt-add-repository ppa:ansible/ansible -y
