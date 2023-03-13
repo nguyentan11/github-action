@@ -31,11 +31,11 @@ jobs:
         ansible --version
         python3 --version
         pip3 --version
-        python3 -m pip install pywinrm
+        . /opt/pipx/venvs/ansible-core/bin/activate && /opt/pipx/venvs/ansible-core/bin/python -m pip install pywinrm
     - name: Checkout Terraform repo
       uses: actions/checkout@v3
       with:
-        repository: nguyentan11/fsoft-lab1  
+        repository: nguyentan11/fsoft-lab1
         ref: 'test'
     - name: Specific terraform version
       uses: hashicorp/setup-terraform@v2
