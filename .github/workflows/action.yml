@@ -47,8 +47,3 @@ jobs:
         cat Tan-TF-Windows-key
         cat ansible-inventory/inventory
         ansible-playbook -i ansible-inventory/inventory ansible-inventory/test.yml
-    - name: destroy TF
-      if: always()
-      run: terraform destroy -auto-approve
-
-        
