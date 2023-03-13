@@ -19,16 +19,16 @@ jobs:
         ref: 'test'
     - name: Install dependencies
       run: |
+        sudo apt purge --auto-remove python3
+        sudo apt update -y
+        sudo apt upgrade -y
+        python3 -V
         sudo apt-add-repository ppa:ansible/ansible -y
         sudo apt update -y
         sudo apt install software-properties-common -y
         sudo apt install ansible -y
         ls /usr/bin/python*
-        sudo apt install python3-pip -y
-        pip3 --version
-        pip3 install pywinrm
-        pip3 install ansible
         ansible --version
         python --version
-        ls -al /opt/pipx/venvs/ansible-core/lib/python3.10/site-packages/ansible/modules
+        sudo find / -name win_ping.ps1
     
