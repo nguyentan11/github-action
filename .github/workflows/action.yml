@@ -24,7 +24,6 @@ jobs:
         pip install pywinrm
         pip install ansible
         ansible --version
-        sudo apt install telnet
     - name: Checkout Terraform repo
       uses: actions/checkout@v3
       with:
