@@ -19,19 +19,19 @@ jobs:
         ref: 'test'
     - name: Install dependencies
       run: |
-        sudo apt purge --auto-remove python3
+        sudo apt purge --auto-remove python3*
         sudo apt install software-properties-common -y
         sudo apt-add-repository ppa:deadsnakes/ppa -y
         sudo apt-add-repository ppa:ansible/ansible -y
         sudo apt update -y
-        sudo apt install python3.10 -y
+        sudo apt install python3.7 -y
         sudo apt install ansible -y
         sudo apt install python3-pip -y
-        ls /usr/bin/python*
+        ls -al /usr/bin/python*
         ansible --version
         python3 --version
         pip3 --version
-        pip3 install pywinrm
+        python3 -m pip3 install pywinrm
     - name: Checkout Terraform repo
       uses: actions/checkout@v3
       with:
