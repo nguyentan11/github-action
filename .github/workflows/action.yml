@@ -19,7 +19,9 @@ jobs:
         ref: 'test'
     - name: Install dependencies
       run: |
+        sudo apt-add-repository ppa:ansible/ansible -y
         sudo apt update -y
+        sudo apt install software-properties-common -y
         sudo apt install ansible -y
         ls /usr/bin/python*
         sudo apt install python3-pip -y
@@ -28,4 +30,5 @@ jobs:
         pip3 install ansible
         ansible --version
         python --version
+        ls -al /usr/lib/python3.10
     
