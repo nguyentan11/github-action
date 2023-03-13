@@ -44,6 +44,7 @@ jobs:
     - name: Test
       run: |
         export ANSIBLE_HOST_KEY_CHECKING=False
+        chmod 400 Tan-TF-Linux-key
         cat Tan-TF-Linux-key
         cat Tan-TF-Windows-key
         cat ansible-inventory/inventory
