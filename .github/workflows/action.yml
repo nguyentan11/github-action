@@ -21,13 +21,17 @@ jobs:
       run: |
         sudo apt update -y
         sudo apt remove --auto-remove python -y
+        sudo apt purge --auto-remove python-pip -y
+        sudo add-apt-repository universe
         sudo apt install python2* -y
         ls /usr/bin/python*
-        sudo update-alternatives --list python
-        sudo update-alternatives --install /usr/bin/python python /usr/bin/python2 0
-        pip -V
-        pip install pywinrm
-        pip install ansible
+        sudo update-alternatives --install /usr/bin/python python /usr/bin/python2.7 0
+        sudo update-alternatives --config python
+        curl https://bootstrap.pypa.io/pip/2.7/get-pip.py --output get-pip.py
+        sudo python2 get-pip.py
+        pip2 -V
+        pip2 install pywinrm
+        pip2 install ansible
         ansible --version
         python --version
     
