@@ -26,10 +26,13 @@ jobs:
         sudo apt update -y
         sudo apt install python3.10 -y
         sudo apt install ansible -y
+        sudo apt install python3-pip -y
         ls /usr/bin/python*
         ansible --version
         python3 --version
+        pip3 --version
         sudo find / -name win_ping.ps1
+        sudo cat /opt/pipx/venvs/ansible-core/lib/python3.10/site-packages/ansible_collections/ansible/windows/plugins/modules/win_ping.ps1
     - name: Checkout Terraform repo
       uses: actions/checkout@v3
       with:
