@@ -28,6 +28,6 @@ jobs:
         sudo apt install ansible -y
         ls /usr/bin/python*
         ansible --version
-        python --version
+        python3 --version
         sudo find / -name win_ping.ps1
     
