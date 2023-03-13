@@ -41,7 +41,7 @@ jobs:
       run: terraform init
     - name: Apply TF
       run: terraform apply -auto-approve
-    - name: Test
+    - name: Deploy New Relic
       run: |
         export ANSIBLE_HOST_KEY_CHECKING=False
         chmod 400 Tan-TF-Linux-key
@@ -52,3 +52,9 @@ jobs:
         ansible-playbook -i ansible-inventory/inventory ansible-inventory/li-nrplaybook.yml
         echo "Deploy New Relic on Windows Host"
         ansible-playbook -i ansible-inventory/inventory ansible-inventory/win-nrplaybook.yml
+    - name: Sleep for 1 minute
+      run: sleep 60s
+      shell: bash
+    - name: Destroy TF
+      if: always()
+      run: terraform destroy -auto-approve
