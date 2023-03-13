@@ -50,7 +50,5 @@ jobs:
       run: terraform apply -auto-approve
     - name: Test
       run: |
+        cat ansible-inventory/inventory
         ansible windows -vvv -i ansible-inventory/inventory -m win_ping
-    - name: Destroy TF
-      if: always()
-      run: terraform destroy -auto-approve
