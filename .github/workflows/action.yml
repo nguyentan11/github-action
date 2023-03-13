@@ -40,6 +40,5 @@ jobs:
     - name: Test
       run: |
         export ANSIBLE_HOST_KEY_CHECKING=False
-        cat Tan-TF-Windows-key
         cat inventory
         ansible -i inventory -m win_ping
