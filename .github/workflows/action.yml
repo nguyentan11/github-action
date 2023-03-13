@@ -21,9 +21,10 @@ jobs:
       run: |
         sudo apt update -y
         ls /usr/bin/python*
-        pip -V
-        pip install pywinrm
-        pip install ansible
+        sudo apt install python3-pip -y
+        pip3 --version
+        pip3 install pywinrm
+        pip3 install ansible
         ansible --version
         python --version
     
