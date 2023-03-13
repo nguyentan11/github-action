@@ -28,5 +28,5 @@ jobs:
         ansible --version
         python --version
         ls -al /usr/lib
-        ls -al /usr/lib/python3
+        ls -al /usr/lib/python3.10
     
