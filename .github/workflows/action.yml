@@ -1,0 +1,60 @@
+name: terraform-deploy
+run-name: ${{ github.actor }} is deploying terraform infrastructure
+on:
+  push:
+    branches: [ test ]
+  workflow_dispatch:
+jobs:
+  terraform-test:
+    name: Deploy TF
+    runs-on: ubuntu-latest
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_REGION: ${{ secrets.AWS_REGION }}
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        repository: nguyentan11/github-action
+        ref: 'test'
+    - name: Install dependencies
+      run: |
+        sudo apt update -y
+        ls -al /usr/bin/python*
+        python3 -m pip -V
+        python3 -m pip install --user ansible-core==2.12.3
+        ansible --version
+        python3 -m pip install pywinrm
+        ansible-galaxy collection install ansible.windows
+        ansible-galaxy collection install community.windows
+    - name: Checkout Terraform repo
+      uses: actions/checkout@v3
+      with:
+        repository: nguyentan11/fsoft-lab1
+        ref: 'test'
+    - name: Specific terraform version
+      uses: hashicorp/setup-terraform@v2
+      with:
+        terraform_version: 1.3.9
+        terraform_wrapper: false
+    - name: Init TF
+      run: terraform init
+    - name: Apply TF
+      run: terraform apply -auto-approve
+    - name: Deploy New Relic
+      run: |
+        export ANSIBLE_HOST_KEY_CHECKING=False
+        chmod 400 Tan-TF-Linux-key
+        cat Tan-TF-Linux-key
+        cat Tan-TF-Windows-key
+        cat ansible-inventory/inventory
+        echo "Deploy New Relic on Linux Host"
+        ansible-playbook -i ansible-inventory/inventory ansible-inventory/li-nrplaybook.yml
+        echo "Deploy New Relic on Windows Host"
+        ansible-playbook -i ansible-inventory/inventory ansible-inventory/win-nrplaybook.yml
+    - name: Sleep for 1 minute
+      run: sleep 60s
+      shell: bash
+    - name: Destroy TF
+      if: always()
+      run: terraform destroy -auto-approve
