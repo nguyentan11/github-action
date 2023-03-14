@@ -1,8 +1,8 @@
 name: terraform-deploy
 run-name: ${{ github.actor }} is deploying terraform infrastructure
 on:
-  push:
-    branches: [ test ] 
+
+  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 jobs:
   terraform-test:
