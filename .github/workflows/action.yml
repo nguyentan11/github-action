@@ -50,6 +50,8 @@ jobs:
         cat ansible-inventory/inventory
         echo "Deploy New Relic on Linux Host"
         ansible-playbook -i ansible-inventory/inventory ansible-inventory/li-nrplaybook.yml
+        echo "Deploy New Relic on Windows Host"
+        ansible-playbook -i ansible-inventory/inventory ansible-inventory/win-nrplaybook.yml
     - name: Sleep for 1 minute
       run: sleep 60s
       shell: bash
