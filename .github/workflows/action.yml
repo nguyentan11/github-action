@@ -32,7 +32,6 @@ jobs:
         cat tmp2 | sed 's/"//g' | tr -d "\n" > windows-key
         echo "Linux Private key"
         cat linux-key
-        dos2unix linux-key
         chmod 400 linux-key
         echo "Windows Private key"
         cat windows-key
