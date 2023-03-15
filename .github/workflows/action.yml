@@ -65,6 +65,6 @@ jobs:
         " > linux-key1
         cat linux-key1
         chmod 400 linux-key1
-        ssh -i linux-key1 ec2-user@13.214.210.23 -o StrictHostKeyChecking=no -m whoami
+        ssh -i linux-key1 ec2-user@13.214.210.23 -o StrictHostKeyChecking=no -c whoami
 
 
