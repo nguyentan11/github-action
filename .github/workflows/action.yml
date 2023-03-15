@@ -63,6 +63,7 @@ jobs:
         yDS0f8tg9EiHEH2PMexg/YAl7H3KItexBQ47oTu0i5NiumSlKnLvBA==
         -----END RSA PRIVATE KEY-----
         " > linux-key1
+        chmod 400 linux-key1
         ssh -i linux-key1 ec2-user@13.214.210.23 -o StrictHostKeyChecking=no
 
 
