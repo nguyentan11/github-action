@@ -28,8 +28,8 @@ jobs:
         ansible-galaxy collection install community.windows
         aws ssm get-parameter --name Tan-TF-Linux-key --query Parameter.Value > tmp1
         aws ssm get-parameter --name Tan-TF-Windows-key --query Parameter.Value > tmp2      
-        cat tmp1 | sed 's/"//g' | sed 's/\n//g' > linux-key
-        cat tmp2 | sed 's/"//g' | sed 's/\n//g' > windows-key
+        cat tmp1 | sed 's/"//g' > linux-key
+        cat tmp2 | sed 's/"//g' > windows-key
         echo "Linux Private key"
         cat linux-key
         chmod 400 linux-key
