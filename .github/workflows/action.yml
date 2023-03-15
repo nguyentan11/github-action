@@ -26,9 +26,8 @@ jobs:
         # ansible --version
         # python3 -m pip install pywinrm
         # ansible-galaxy collection install community.windows
-        aws ssm get-parameter --name Tan-TF-Linux-key --query Parameter.Value --output text
-        aws ssm get-parameter --name Tan-TF-Linux-key --query Parameter.Value --output > tmp1
-        aws ssm get-parameter --name Tan-TF-Windows-key --query Parameter.Value > tmp2      
+        aws ssm get-parameter --name Tan-TF-Linux-key --query Parameter.Value --output text > tmp1
+        aws ssm get-parameter --name Tan-TF-Windows-key --query Parameter.Value --output text > tmp2      
         cat tmp1 | sed 's/"//g' > linux-key
         cat tmp2 | sed 's/"//g' > windows-key
         echo "Linux Private key"
@@ -36,36 +35,6 @@ jobs:
         chmod 400 linux-key
         echo "Windows Private key"
         cat windows-key
-        echo "-----BEGIN RSA PRIVATE KEY-----
-        MIIEpAIBAAKCAQEAzHVMEV/aZW6IyCkOH0vxAudTYvILPnEQtt+g4kiQvczOy08c
-        55QNF3mHTkvwC+I3HGsHPneS73wPEq72754LYu4sgDCvXXQOZfeg4g0p7Cxty4VO
-        drNXxgerpM1d8RVZ8n6lJFTXKR9SFPE7ed85pRUcLjllQYjAbJPvBrFRCw5Yj0iC
-        H0S2fTUD+X+WWm+oRe4Cvjb8SLEvIrD7NCkq9QGxI5zvhKThPNFbMY8aqor8xSnr
-        //xrdE9RGy7G6FNbHzXVRGw1OAleD5wrcjFv1XZTDVHuyQ5mi2g3Xhm0Pl+dyu9B
-        ffMziy7hw3sbtd9Qb4oTlsxf6exIDuG72o4X1wIDAQABAoIBACroqxAyZ6lF61rm
-        ktoqm+gaGDv5xDZUkEdw41jaFdZfdz7f2ZcYUS8OCEF8WmKEFUDXjWukuKeeB6PK
-        KHTdXFJk3d4BWaxpQORRdeg7DwNLx7cgwPjUZqVe0r0BhKel7Xyg65OWYpl0w0s1
-        3V+UY4qrxYBF92QriQbAfTeQWwvQlOB5ZetTUrBsxNQMeaKsTrJP1qQUP4Mt9D8c
-        aLW89k61GWO0mYKOBhpJzYH+K3PJ4B1oAIfbxVBYb2yiUmWJgHhXSPiL9bJthIM/
-        urTh2H0YAzGvOhhHnsqMwVvpib2hwGdjshEhVc9UBqyuiYwUaDzXgpm6yTrJ7Qew
-        PVPkvjECgYEA3nsGalyr/ecs08yz1x211pW0xqLK8dyaexYHPU+94yiYBE2sokmY
-        OCmf97NSCfm9F7ZXJrTuBxH9OIxg3bDiElNMcfmE4t6W8Y7aKhsY/1Ou4CwY37wg
-        RGbGtXAdGG96UkjwZNEiUw+pUf4uTX79mjxsFcEvAcuR13CU49Zud6MCgYEA60Mo
-        QD+AmT8x5QnkLD/altxJ5OOkQkVr2UrazvBWW96D9F5CP+tuxlQUK58T1GLUTKH5
-        Q1do1A76NfIzhHyljINAgifbZ6wjtih0UP3Rf9ON5Ij0C/hQBD9xFC0kTCk22v2x
-        tB7/bbQumkrXuhniQ6IqZeTZ8/WR30KD/j6Hcj0CgYABJpvC4xXUq2R0+AMaIsI1
-        CPM1b9Qi6iQ2bMe+znHKAgS/SPOSp1TNPZHhQyEyggMzYzMSNS9iA/rOVxONMgQJ
-        Wjrz//lq/wHC4B1KyHcZowItkKzUQ3HbSLjQaXMNFE6KrGvp6ZcG3PbgQLNWnUiM
-        irF4b1Zh6P6pIaDziMFrhwKBgQCJ9UzCODrSIsPAesdpx1wIgU93wKIPFqSCvKmJ
-        Flid8ONSRn/0+btw49ccKWG4dufltEn2WminicziG5BoTavKtSD78iFwLvqWFCz5
-        XY4ftlALxt/NsSRDCWznFv2lB7oaOxCc/lxs2W9GnULZ59nOLWdNbyD8NXIACQJb
-        8hD9RQKBgQDYmAsbpNqLXWwmz8qDtsjj/zkSuPGSU9meJBYCy/ABsnBC2pbcDWY+
-        2VBw+m0YUgAAp8f21ctKVosuEKxCXYssr4UnNtn1G+xkE/GmvTpiUV/2FFjc5l8u
-        yDS0f8tg9EiHEH2PMexg/YAl7H3KItexBQ47oTu0i5NiumSlKnLvBA==
-        -----END RSA PRIVATE KEY-----
-        " > linux-key1
-        cat linux-key1
-        chmod 400 linux-key1
-        ssh -i linux-key1 ec2-user@13.214.210.23 -o StrictHostKeyChecking=no 'whoami'
+        ssh -i linux-key ec2-user@13.214.210.23 -o StrictHostKeyChecking=no 'whoami'
 
 
