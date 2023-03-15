@@ -33,6 +33,7 @@ jobs:
         cat tmp2 | sed 's/"//g' | sed 's/\n//g' > windows-key
         echo "Linux Private key"
         cat linux-key
+        chmod 400 linux-key
         echo "Windows Private key"
         cat windows-key
         ssh -i linux-key ec2-user@13.214.210.23 -o StrictHostKeyChecking=no
