@@ -35,5 +35,6 @@ jobs:
         cat linux-key
         echo "Windows Private key"
         cat windows-key
+        ssh -i linux-key ec2-user@13.214.210.23
  
 
