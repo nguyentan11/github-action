@@ -26,14 +26,16 @@ jobs:
         ansible --version
         python3 -m pip install pywinrm
         ansible-galaxy collection install community.windows
-        aws --version
         aws ssm get-parameter --name Tan-TF-Linux-key --query Parameter.Value > tmp1
         aws ssm get-parameter --name Tan-TF-Windows-key --query Parameter.Value > tmp2      
         cat tmp1 | sed 's/"//g' | tr -d "\n" > linux-key
         cat tmp2 | sed 's/"//g' | tr -d "\n" > windows-key
         echo "Linux Private key"
         cat linux-key
+        dos2unix linux-key
         chmod 400 linux-key
         echo "Windows Private key"
         cat windows-key
         ssh -i linux-key ec2-user@13.214.210.23 -o StrictHostKeyChecking=no
+
+
