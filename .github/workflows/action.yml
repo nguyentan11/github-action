@@ -35,5 +35,4 @@ jobs:
         cat linux-key
         echo "Windows Private key"
         cat windows-key
-        export ANSIBLE_HOST_KEY_CHECKING=False
-        ssh -i linux-key ec2-user@13.214.210.23
+        ssh -i linux-key ec2-user@13.214.210.23 -o StrictHostKeyChecking=no
