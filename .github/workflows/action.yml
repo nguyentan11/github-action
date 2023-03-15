@@ -28,4 +28,6 @@ jobs:
         ansible-galaxy collection install community.windows
         aws --version
         aws ssm get-parameter --name Tan-TF-Linux-key
+        aws ssm get-parameter --name Tan-TF-Windows-key
+
 
