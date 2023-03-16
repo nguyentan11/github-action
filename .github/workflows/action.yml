@@ -17,15 +17,24 @@ jobs:
       with:
         repository: nguyentan11/github-action
         ref: 'test'
-    # - name: Install dependencies
-    #   run: |
-    #     sudo apt update -y
-    #     ls -al /usr/bin/python*
-    #     python3 -m pip -V
-    #     python3 -m pip install --user ansible-core==2.12.3
-    #     ansible --version
-    #     python3 -m pip install pywinrm
-    #     ansible-galaxy collection install community.windows
+    - name: Install dependencies
+      run: |
+        sudo apt update -y
+        ls -al /usr/bin/python*
+        python3 -m pip -V
+        python3 -m pip install --user ansible-core==2.12.3
+        ansible --version
+        python3 -m pip install pywinrm
+        ansible-galaxy collection install community.windows
+        saws ssm get-parameter --name Tan-TF-Linux-key --query Parameter.Value --output text > tmp1
+        aws ssm get-parameter --name Tan-TF-Windows-key --query Parameter.Value --output text > tmp2      
+        cat tmp1 | sed 's/"//g' > linux-key
+        cat tmp2 | sed 's/"//g' > windows-key
+        chmod 400 *key
+        echo "Linux Private key"
+        cat linux-key
+        echo "Windows Private key"
+        cat windows-key
     - name: Checkout Terraform repo
       uses: actions/checkout@v3
       with:
@@ -43,17 +52,8 @@ jobs:
     - name: Deploy New Relic
       run: |
         export ANSIBLE_HOST_KEY_CHECKING=False
-        aws ssm get-parameter --name Tan-TF-Linux-key --query Parameter.Value --output text > tmp1
-        aws ssm get-parameter --name Tan-TF-Windows-key --query Parameter.Value --output text > tmp2      
-        cat tmp1 | sed 's/"//g' > linux-key
-        cat tmp2 | sed 's/"//g' > windows-key
-        chmod 400 *key
-        echo "Linux Private key"
-        cat linux-key
-        echo "Windows Private key"
-        cat windows-key
-    #     echo "Deploy New Relic on Linux Host"
-    #     ansible-playbook -i ansible-inventory/inventory roles/main.yml
+        echo "Deploy New Relic on Linux Host"
+        # ansible-playbook -i ansible-inventory/inventory roles/main.yml
     - name: Sleep for 1 minute
       run: sleep 60s
       shell: bash
