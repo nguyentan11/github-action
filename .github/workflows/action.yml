@@ -41,7 +41,10 @@ jobs:
       with:
         secret: ${{ github.TOKEN }}
         approvers: nguyentan11
-        minimum-approvals: 1    
+        minimum-approvals: 1   
+        exclude-workflow-initiator-as-approver: false
+        additional-approved-words: ''
+        additional-denied-words: '' 
     - name: Init TF
       run: terraform init
     # - name: Apply TF
