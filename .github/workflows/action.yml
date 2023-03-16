@@ -36,25 +36,34 @@ jobs:
       with:
         terraform_version: 1.3.9
         terraform_wrapper: false
+    - name: Manual approval to apply TF
+      uses: trstringer/manual-approval@v1
+      with:
+        secret: ${{ github.TOKEN }}
+        approvers: nguyentan11
+        minimum-approvals: 1    
     - name: Init TF
       run: terraform init
-    - name: Apply TF
-      run: terraform apply -auto-approve
-    - name: Deploy New Relic
-      run: |
-        export ANSIBLE_HOST_KEY_CHECKING=False
-        echo "Deploy New Relic on Linux Host"
-        aws ssm get-parameter --name Tan-TF-Linux-key --query Parameter.Value --output text > tmp1
-        aws ssm get-parameter --name Tan-TF-Windows-key --query Parameter.Value --output text > tmp2      
-        cat tmp1 | sed 's/"//g' > linux-key
-        cat tmp2 | sed 's/"//g' > windows-key
-        chmod 400 linux-key
-        chmod 400 windows-key
-        ansible-playbook -i ansible-inventory/inventory roles/main.yml
-        #ansible-playbook -i ansible-inventory/inventory ansible-inventory/win-nrplaybook.yml
-    - name: Sleep for 1 minute
-      run: sleep 60s
-      shell: bash
-    - name: Destroy TF
-      if: always()
-      run: terraform destroy -auto-approve
+    # - name: Apply TF
+    #   run: terraform apply -auto-approve
+    # - name: Deploy New Relic
+    #   run: |
+    #     export ANSIBLE_HOST_KEY_CHECKING=False
+    #     echo "Deploy New Relic on Linux Host"
+    #     aws ssm get-parameter --name Tan-TF-Linux-key --query Parameter.Value --output text > tmp1
+    #     aws ssm get-parameter --name Tan-TF-Windows-key --query Parameter.Value --output text > tmp2      
+    #     cat tmp1 | sed 's/"//g' > linux-key
+    #     cat tmp2 | sed 's/"//g' > windows-key
+    #     chmod 400 linux-key
+    #     chmod 400 windows-key
+    #     ansible-playbook -i ansible-inventory/inventory roles/main.yml
+    #     #ansible-playbook -i ansible-inventory/inventory ansible-inventory/win-nrplaybook.yml
+    # - name: Manual approval to destroy TF
+    #   uses: trstringer/manual-approval@v1
+    #   with:
+    #     secret: ${{ github.TOKEN }}
+    #     approvers: nguyentan11
+    #     minimum-approvals: 1
+    # - name: Destroy TF
+    #   if: always()
+    #   run: terraform destroy -auto-approve
