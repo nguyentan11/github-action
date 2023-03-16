@@ -26,7 +26,7 @@ jobs:
         ansible --version
         python3 -m pip install pywinrm
         ansible-galaxy collection install community.windows
-   - name: Checkout Terraform repo
+    - name: Checkout Terraform repo
       uses: actions/checkout@v3
       with:
         repository: nguyentan11/fsoft-lab1
@@ -53,3 +53,10 @@ jobs:
         echo "Windows Private key"
         cat windows-key
         echo "Deploy New Relic on Linux Host"
+        ansible-playbook -i ansible-inventory/inventory role/main.yml
+    - name: Sleep for 1 minute
+      run: sleep 60s
+      shell: bash
+    - name: Destroy TF
+      if: always()
+      run: terraform destroy -auto-approve
