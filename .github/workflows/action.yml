@@ -54,9 +54,9 @@ jobs:
     #     cat windows-key
     #     echo "Deploy New Relic on Linux Host"
     #     ansible-playbook -i ansible-inventory/inventory roles/main.yml
-    # - name: Sleep for 1 minute
-    #   run: sleep 60s
-    #   shell: bash
+    - name: Sleep for 1 minute
+      run: sleep 60s
+      shell: bash
     - name: Destroy TF
       if: always()
       run: terraform destroy -auto-approve
