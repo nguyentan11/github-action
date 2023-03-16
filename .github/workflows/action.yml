@@ -53,7 +53,7 @@ jobs:
         echo "Windows Private key"
         cat windows-key
         cat ansible-inventory/inventory
-        ls -al
+        ls -al *
         ls -al role
         echo "Deploy New Relic on Linux Host"
         # ansible-playbook -i ansible-inventory/inventory role/main.yml
