@@ -50,7 +50,9 @@ jobs:
         cat tmp2 | sed 's/"//g' > windows-key
         chmod 400 linux-key
         chmod 400 windows-key
-        ansible-playbook -i ansible-inventory/inventory roles/main.yml
+        #ansible-playbook -i ansible-inventory/inventory roles/main.yml
+        ansible -i ansible-inventory/inventory windows -m win_ping
+        ansible -i ansible-inventory/inventory windows -m win_whoami
     - name: Sleep for 1 minute
       run: sleep 60s
       shell: bash
