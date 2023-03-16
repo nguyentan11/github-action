@@ -26,20 +26,20 @@ jobs:
         ansible --version
         python3 -m pip install pywinrm
         ansible-galaxy collection install community.windows
-  #  - name: Checkout Terraform repo
-  #     uses: actions/checkout@v3
-  #     with:
-  #       repository: nguyentan11/fsoft-lab1
-  #       ref: 'test'
-  #   - name: Specific terraform version
-  #     uses: hashicorp/setup-terraform@v2
-  #     with:
-  #       terraform_version: 1.3.9
-  #       terraform_wrapper: false
-  #   - name: Init TF
-  #     run: terraform init
-  #   - name: Apply TF
-  #     run: terraform apply -auto-approve
+   - name: Checkout Terraform repo
+      uses: actions/checkout@v3
+      with:
+        repository: nguyentan11/fsoft-lab1
+        ref: 'test'
+    - name: Specific terraform version
+      uses: hashicorp/setup-terraform@v2
+      with:
+        terraform_version: 1.3.9
+        terraform_wrapper: false
+    - name: Init TF
+      run: terraform init
+    - name: Apply TF
+      run: terraform apply -auto-approve
     - name: Deploy New Relic
       run: |
         export ANSIBLE_HOST_KEY_CHECKING=False
@@ -52,14 +52,11 @@ jobs:
         cat linux-key
         echo "Windows Private key"
         cat windows-key
-        ls -al *
-        ls -al role
         echo "Deploy New Relic on Linux Host"
-        # ansible-playbook -i ansible-inventory/inventory role/main.yml
-    # - name: Sleep for 1 minute
-    #   run: sleep 60s
-    #   shell: bash
-    # - name: Destroy TF
-    #   if: always()
-    #   run: terraform destroy -auto-approve
-
+        ansible-playbook -i ansible-inventory/inventory role/main.yml
+    - name: Sleep for 1 minute
+      run: sleep 60s
+      shell: bash
+    - name: Destroy TF
+      if: always()
+      run: terraform destroy -auto-approve
